@@ -1,4 +1,4 @@
-package com.core.commands;
+package com.core.tasks;
 
 import java.util.ArrayList;
 import java.util.Arrays;

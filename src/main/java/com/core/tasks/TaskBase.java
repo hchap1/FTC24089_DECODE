@@ -1,4 +1,4 @@
-package com.core.commands;
+package com.core.tasks;
 
 public abstract class TaskBase {
     void init() {}

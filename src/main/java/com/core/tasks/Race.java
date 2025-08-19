@@ -1,15 +1,15 @@
-package com.core.commands;
+package com.core.tasks;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Parallel extends TaskBase {
+public class Race extends TaskBase {
 
     private List<TaskBase> tasks;
     private List<Boolean> finished;
 
-    public Parallel(TaskBase... tasks) {
+    public Race(TaskBase... tasks) {
         this.tasks = new ArrayList<>();
         this.finished = new ArrayList<>();
         this.tasks.addAll(Arrays.asList(tasks));
@@ -45,19 +45,19 @@ public class Parallel extends TaskBase {
 
     @Override
     public boolean finished() {
-        // Return true if all tasks have finished
+        // Return true if any task has finished
         for (Boolean finished : this.finished) {
-            if (!finished) return false;
+            if (finished) return true;
         }
-        return true;
+        return false;
     }
 
     @Override
     public void end(boolean interrupted) {
-        // Force end all tasks on interruption
-        if (interrupted) {
-            for (TaskBase task : this.tasks) {
-                task.end(true);
+        // End all remaining tasks
+        for (int i = 0; i <this.tasks.size(); i++) {
+            if (!this.finished.get(i)) {
+                this.tasks.get(i).end(interrupted);
             }
         }
     }
