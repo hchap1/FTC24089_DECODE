@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Series extends TaskBase {
-
     private List<TaskBase> tasks;
     private int index;
 
