@@ -5,6 +5,4 @@ public abstract class TaskBase {
     void run() {}
     boolean finished() { return false; }
     void end(boolean interrupted) { }
-
-    Task task() { return new Task(this); }
 }

@@ -6,10 +6,10 @@ import java.util.List;
 
 public class Series extends TaskBase {
 
-    private List<Task> tasks;
+    private List<TaskBase> tasks;
     private int index;
 
-    public Series(Task... tasks) {
+    public Series(TaskBase... tasks) {
         this.tasks = new ArrayList<>();
         this.tasks.addAll(Arrays.asList(tasks));
         this.index = 0;
@@ -17,7 +17,7 @@ public class Series extends TaskBase {
 
     @Override
     public void init() {
-        Task task = this.tasks.get(this.index);
+        TaskBase task = this.tasks.get(this.index);
         if (task != null) {
             task.init();
         }
@@ -25,7 +25,7 @@ public class Series extends TaskBase {
 
     @Override
     public void run() {
-        Task task = this.tasks.get(this.index);
+        TaskBase task = this.tasks.get(this.index);
         if (task != null) {
             task.run();
             if (task.finished()) {
@@ -43,7 +43,7 @@ public class Series extends TaskBase {
     @Override
     public void end(boolean interrupted) {
         if (interrupted) {
-            Task task = this.tasks.get(this.index);
+            TaskBase task = this.tasks.get(this.index);
             if (task != null) {
                 task.end(true);
             }
