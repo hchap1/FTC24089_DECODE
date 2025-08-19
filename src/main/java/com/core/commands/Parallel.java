@@ -6,19 +6,19 @@ import java.util.List;
 
 public class Parallel extends TaskBase {
 
-    private List<Task> tasks;
+    private List<TaskBase> tasks;
 
-    public Parallel(Task... tasks) {
+    public Parallel(TaskBase... tasks) {
         this.tasks = new ArrayList<>();
         this.tasks.addAll(Arrays.asList(tasks));
     }
 
     @Override
-    public void init() { for (Task task : this.tasks) task.init(); }
+    public void init() { for (TaskBase task : this.tasks) task.init(); }
 
     @Override
     public void run() {
-        for (Task task : this.tasks) {
+        for (TaskBase task : this.tasks) {
             task.run();
             if (task.finished()) {
                 task.end(false);
@@ -28,7 +28,7 @@ public class Parallel extends TaskBase {
 
     @Override
     public boolean finished() {
-        for (Task task : this.tasks) {
+        for (TaskBase task : this.tasks) {
             if (!task.finished()) return false;
         }
         return true;
@@ -37,7 +37,7 @@ public class Parallel extends TaskBase {
     @Override
     public void end(boolean interrupted) {
         if (interrupted) {
-            for (Task task : this.tasks) {
+            for (TaskBase task : this.tasks) {
                 task.end(true);
             }
         }
