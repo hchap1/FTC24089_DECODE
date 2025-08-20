@@ -33,5 +33,18 @@ public class LionMotor {
         return this.power;
     }
 
-    public double getPosit
+    public double getPosition() {
+        if (this.hasEncoder) {
+            return this.motor.getCurrentPosition();
+        } else {
+            return 0.0;
+        }
+    }
+
+    public void resetPosition() {
+        if (this.hasEncoder) {
+            this.motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            this.motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        }
+    }
 }
